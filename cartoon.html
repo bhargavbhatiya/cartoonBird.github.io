@@ -1,0 +1,508 @@
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Rye|Ubuntu');
+
+:root {
+  --smartupsell-green-color: rgb(0, 184, 148);
+  --pricing-gray-color: #455A64;
+  --pricing-yellow-color: #FFC201;
+  --pricing-title-color: #2b1d0e;
+  --pricing-track-color: #656D78;
+  --pricing-track-focus-color: #FFE477;
+  --pricing-gold-ingot-icon: url('https://smartupsell.hu/wp-content/uploads/2018/12/gold-ingot.png');
+  --pricing-mining-icon: url('https://smartupsell.hu/wp-content/uploads/2018/12/mining.png');
+  --pricing-money-bag-icon: url('https://smartupsell.hu/wp-content/uploads/2018/12/money-bag.png');
+  --pricing-revolver-icon: url('https://smartupsell.hu/wp-content/uploads/2018/12/revolver.png');
+  --pricing-title-background-image: url('https://smartupsell.hu/wp-content/uploads/2018/12/wooden-board_w1200.png');
+  --pricing-desert-background: url('https://smartupsell.hu/wp-content/uploads/2018/12/western-background.jpg');
+  --pricing-miner-cartoon-image: url('https://smartupsell.hu/wp-content/uploads/2018/12/mine-waggon_400x400px.png');
+  --pricing-mine-wagoon-icon: url('https://smartupsell.hu/wp-content/uploads/2018/12/mine-waggon_128x128px.png');
+  --material-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.pricing-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Ubuntu', sans-serif;
+  background-image: var(--pricing-desert-background);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+.pricing-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Rye', cursive;
+}
+
+.pricing-title-container {
+  color: var(--pricing-title-color);
+  background-image: var(--pricing-title-background-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 20px 0 100px 0;
+  padding: 30px 15px;
+  width: 85%;
+  transform: rotate(-1deg)
+}
+
+.pricing-title-container h1 {
+  text-align: center;
+  font-weight: 400;
+  transform: rotate(1deg)
+}
+
+.pricing-body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+}
+
+.flex-cc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pricing-slider-wrapper {
+  width: 80%;
+  max-width: 1024px;
+  height: 200px;
+  padding: 100px 40px 50px;
+  margin-top: -50px;
+  border-radius: 20px;
+  background-color: rgba(255,255,255,0.6);
+  box-shadow: 2px 4px 8px 2px rgba(0,0,0,1);
+  box-shadow: var(--material-shadow);
+}
+
+.pricing-slider-container::before {
+  content: '';
+  z-index: 99999;
+  display: block;
+  position: absolute;
+  top: 75px;
+  /*left: calc(50%-120px);*/
+  right: 7%;
+  background-image: var(--pricing-miner-cartoon-image);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 240px;
+  height: 240px;
+}
+
+.pricing-slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/** SLIDER TOP */
+
+.pricing-slider-top {
+  height: 100px;
+  padding-bottom: 80px;
+}
+
+.extra-sales-container, .price-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.extra-sales-container {
+  align-items: flex-end;
+  color: var(--smartupsell-green-color);
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  margin-right: 20px;
+  transform: rotate(-2deg);
+  box-shadow: var(--material-shadow);
+}
+
+.extra-sales-value {
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.extra-sales-label {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.price-container {
+  align-items: flex-start;
+  color: var(--pricing-gray-color);
+}
+
+.price-value {
+  font-size: 50px;
+}
+
+.price-label {
+   font-size: 24px;
+}
+
+.pricing-slider-footer {
+  padding-top: 10px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/** SLIDER */
+
+.pricing-slider {
+  width: 100%;
+}
+
+/** Applying base CSS styles */
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+
+/** 
+* ====== STYLING THE THUMB =======
+*/
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: var(--pricing-mine-wagoon-icon); 
+  background-size: 100%;
+  cursor: pointer;
+  transition: all linear 200ms;
+  margin-top: -67px;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  -moz-appearance: none;
+  height: 137px;
+  width: 70px;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-image: var(--pricing-mine-wagoon-icon); 
+  background-size: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+input[type=range]::-moz-range-thumb:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: var(--pricing-mine-wagoon-icon); 
+  background-size: 100%;
+  cursor: pointer;
+}
+
+
+/** 
+* ======= STYLING THE TRACK =======
+*/
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: var(--material-shadow);
+  background: var(--pricing-track-color);
+  border-radius: 3px;
+  border: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: var(--pricing-track-focus-color);
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: var(--material-shadow);
+  background: var(--pricing-track-color);
+  border-radius: 3px;
+  border: none;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+.pricing-footer {
+   width: 100%;
+}
+
+.advantages-section {
+  width: 100%;
+  display: grid;
+  grid-gap: 20px 70px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr;
+  justify-content: center;
+  justify-items: center;
+  background:rgba(160, 60, 14, 0.605);
+  box-sizing: border-box;
+  padding: 50px;
+}
+.advantage-box{
+  padding: 14px;
+  background-color: rgba(255, 250, 250, 0.9);
+  box-shadow: 1px 4px 8px 1px rgba(0,0,0,0.7);
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.advantage-title {
+  font-family: 'Rye', cursive;
+  text-align: center;
+}
+
+.advantage-title::before {
+  content: '';
+  display: block;
+  position: relative;
+  left: 50%;
+  margin: 0 0 20px -50px;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.advantage-title.revolver::before {
+  background-image: var(--pricing-revolver-icon);
+}
+.advantage-title.money-bag::before {
+  background-image: var(--pricing-money-bag-icon);
+}
+.advantage-title.mining::before {
+  background-image: var(--pricing-mining-icon);
+}
+.advantage-title.gold-ingot::before {
+  background-image: var(--pricing-gold-ingot-icon);
+}
+
+.advantage-details {
+  text-align: justify;
+  font-size: 18px;
+}
+
+/** GRADIENT TO CARDS **/
+.granimate {
+  background-color: #2ecc70a8;
+  animation: hue 11s linear 0s infinite reverse;
+}
+.granimate::before {
+  background: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
+  animation: hue 12s linear 1s infinite;
+}
+
+@keyframes hue {
+  to {
+    filter: hue-rotate(1.5turn);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+/** LARGE DESKTOP */
+
+@media screen and (min-width: 1600px) {
+  .pricing-slider-container::before {
+    right: 15%;
+  }
+  .pricing-wrapper {
+    background-position: center 80%;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .pricing-slider-container::before {
+    right: 20%;
+  }
+}
+
+/** MOBILE */
+
+@media screen and (max-width: 800px) {
+  .pricing-title-container {
+    background: none;
+    margin-bottom: 30px;
+  }
+  .advantages-section {
+    grid-gap: 20px 70px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 20px;
+  }
+  .pricing-slider-container::before {
+    background: none;
+    width: 0;
+    height: 0;
+  }
+  
+}
+</style>
+<body>
+  <div class="pricing-wrapper">
+    <div class="pricing-container">
+    <header class="pricing-header">
+      <div class="pricing-title-container">
+        <h1>
+          hey, I am BHARGAV BHATIYA
+        </h1>
+      </div>
+    </header>
+    
+    <main class="pricing-body">
+    <section class="pricing-slider-wrapper">
+      <div class="pricing-slider-container">
+        <div class="pricing-slider-top flex-cc">
+          <div class="extra-sales-container">
+            <span id="extraSalesValue" class="extra-sales-value">25.000 Ft</span>
+            <div class="extra-sales-label">Cartoon theme</div>
+          </div>
+          <div class="price-container">
+            <div id="priceValue" class="price-value">0 Ft</div>
+            <div class="price-label">"Move below cart..."</div>
+          </div>
+        </div>
+        
+        <div class="pricing-slider">
+          <input 
+             type="range" 
+             title="Fogd és vidd módszerrel mozgasd a csillét a sínen"
+             id="pricingSlider" 
+             class="pricing-slider-input"
+             name="volume"
+             min="0" 
+             max="100"
+             step="10"
+             value="0"
+      >
+        </div>
+      </div>
+      <div class="pricing-slider-footer">
+        <div>TIP: ... Above cart is slider ... Try and Enjoy ... </div>
+      </div>
+    </section>
+    </main>
+    
+    <footer class="pricing-footer">
+    <section class="advantages-section full granimate">
+      <div class="advantage-box">
+        <h3 class="advantage-title mining">Hardwork Human </h3>
+        <p class="advantage-details">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        </p>
+      </div>
+      <div class="advantage-box">
+        <h3 class="advantage-title money-bag">Amount plus level</h3>
+        <p class="advantage-details">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        </p>
+      </div>
+      <div class="advantage-box">
+        <h3 class="advantage-title gold-ingot">A Profit Loss Gold</h3>
+        <p class="advantage-details">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusan dolomque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+        </p>
+      </div>
+      <div class="advantage-box">
+        <h3 class="advantage-title revolver">A there anyone who loves...</h3>
+        <p class="advantage-details">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+        </p>
+      </div>
+    </section>
+    </footer>
+    </div>
+    </div>
+</body>
+
+</html>
